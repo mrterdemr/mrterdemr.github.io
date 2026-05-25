@@ -2,6 +2,7 @@ const githubUser = "mrterdemr";
 const excludedRepoNames = new Set(["mrterdemr.github.io"]);
 
 const repoTypeOverrides = {
+  fastnote: "MacOS App",
   hash2tie: "CLI Tool",
   "eXit-game": "Game",
 };
@@ -188,8 +189,6 @@ async function loadGithubProjects() {
     renderSelects();
     renderFilterButtons();
     renderDashboard();
-    renderCommitTable(commits);
-    renderActivity(commits);
   } catch (error) {
     console.warn(error);
   }
@@ -263,11 +262,26 @@ function currentProjects() {
   });
 }
 
+function currentCommits() {
+  const selectedPresent = presentSelect.value || "all";
+
+  if (selectedPresent === "all") {
+    return commits;
+  }
+
+  return commits.filter((commit) => dateIsFromSelectedYear(commit.isoDate, selectedPresent));
+}
+
 function dateYear(value) {
   if (!value) return null;
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return null;
   return String(date.getUTCFullYear());
+}
+
+function dateIsFromSelectedYear(value, selectedYear) {
+  const year = dateYear(value);
+  return year ? Number(year) >= Number(selectedYear) : false;
 }
 
 function commitYearsByRepo() {
@@ -294,9 +308,10 @@ function presentYears() {
 }
 
 function projectMatchesYear(project, selectedYear) {
-  if (dateYear(project.pushedAt) === selectedYear) return true;
+  if (dateIsFromSelectedYear(project.pushedAt, selectedYear)) return true;
   const yearsByRepo = commitYearsByRepo();
-  return Boolean(project.repo && yearsByRepo[project.repo]?.has(selectedYear));
+  if (!project.repo || !yearsByRepo[project.repo]) return false;
+  return [...yearsByRepo[project.repo]].some((year) => Number(year) >= Number(selectedYear));
 }
 
 function countBy(items, key) {
@@ -407,8 +422,7 @@ function renderPie(target, legendTarget, rows) {
     .join("");
 }
 
-function renderActivity(items) {
-  const startYear = 2016;
+function renderActivity(items, startYear = 2016) {
   const currentYear = new Date().getUTCFullYear();
   const years = Array.from({ length: currentYear - startYear + 1 }, (_, index) => startYear + index);
   const updatesByYear = years.reduce((updates, year) => {
@@ -428,40 +442,54 @@ function renderActivity(items) {
 
   const chartRows = years.map((year) => [String(year), { count: updatesByYear[year], label: String(year) }]);
   const points = chartRows.map(([, row]) => row.count);
-  const max = Math.max(...points, 2);
-  const step = chartRows.length > 1 ? 588 / (chartRows.length - 1) : 0;
+  const max = Math.max(...points, 1);
+  const axisStep = max <= 4 ? 1 : Math.ceil(max / 3);
+  const axisMax = max <= 4 ? max : Math.ceil(max / axisStep) * axisStep;
+  const axisLabels = Array.from({ length: Math.floor(axisMax / axisStep) + 1 }, (_, index) => index * axisStep);
+  const step = chartRows.length > 1 ? 570 / (chartRows.length - 1) : 0;
   const coordinates = points
     .map((point, index) => {
-      const x = chartRows.length > 1 ? 24 + index * step : 318;
-      const y = 150 - (point / max) * 118;
+      const x = chartRows.length > 1 ? 24 + index * step : 309;
+      const y = 150 - (point / axisMax) * 118;
       return `${x},${y}`;
     })
     .join(" ");
   const yearLabels = chartRows
     .map(([, row], index) => {
-      const x = chartRows.length > 1 ? 24 + index * step : 318;
+      const x = chartRows.length > 1 ? 24 + index * step : 309;
       return `<text x="${x}" y="180" text-anchor="middle">${row.label}</text>`;
+    })
+    .join("");
+  const axisLabelText = axisLabels
+    .map((label) => {
+      const y = 150 - (label / axisMax) * 118;
+      return `<text x="612" y="${y + 4}" text-anchor="start">${label}</text>`;
     })
     .join("");
 
   document.querySelector("#activityChart").innerHTML = `
     <svg viewBox="0 0 640 190" role="img" aria-label="Project activity line chart">
       <g class="grid-lines">
-        <line x1="24" y1="32" x2="612" y2="32"></line>
-        <line x1="24" y1="72" x2="612" y2="72"></line>
-        <line x1="24" y1="112" x2="612" y2="112"></line>
-        <line x1="24" y1="152" x2="612" y2="152"></line>
+        ${axisLabels
+          .map((label) => {
+            const y = 150 - (label / axisMax) * 118;
+            return `<line x1="24" y1="${y}" x2="600" y2="${y}"></line>`;
+          })
+          .join("")}
       </g>
       <polyline points="${coordinates}"></polyline>
       ${points
         .map((point, index) => {
-          const x = chartRows.length > 1 ? 24 + index * step : 318;
-          const y = 150 - (point / max) * 118;
+          const x = chartRows.length > 1 ? 24 + index * step : 309;
+          const y = 150 - (point / axisMax) * 118;
           return `<circle cx="${x}" cy="${y}" r="4"><title>${chartRows[index][1].label}: ${point}</title></circle>`;
         })
         .join("")}
       <g class="chart-labels">
         ${yearLabels}
+      </g>
+      <g class="chart-axis-labels">
+        ${axisLabelText}
       </g>
     </svg>
   `;
@@ -471,7 +499,10 @@ function renderEndpointTable(items) {
   document.querySelector("#endpointTable").innerHTML = `
     <table>
       <thead>
-        <tr><th>Destination</th></tr>
+        <tr>
+          <th>Destination</th>
+          <th>Name</th>
+        </tr>
       </thead>
       <tbody>
         ${items
@@ -479,6 +510,7 @@ function renderEndpointTable(items) {
             (project) => `
               <tr>
                 <td>${projectDestination(project)}</td>
+                <td>${project.name}</td>
               </tr>
             `,
           )
@@ -534,6 +566,9 @@ function renderProjectTable(items) {
 
 function renderDashboard() {
   const items = currentProjects();
+  const visibleCommits = currentCommits();
+  const selectedPresent = presentSelect.value || "all";
+  const timelineStartYear = selectedPresent === "all" ? 2016 : Number(selectedPresent);
   const projectTypeRows = Object.entries(countBy(items, "type")).map(([label, value]) => ({ label, value }));
   const publishingRows = Object.entries(countBy(items, "publishStatus")).map(([label, value]) => ({ label, value }));
   const techRows = Object.entries(tagCounts(items))
@@ -554,9 +589,10 @@ function renderDashboard() {
       `,
     )
     .join("");
-  renderActivity(commits);
+  renderActivity(visibleCommits, timelineStartYear);
   renderEndpointTable(items);
   renderProjectTable(items);
+  renderCommitTable(visibleCommits);
 }
 
 filterRoot.addEventListener("click", (event) => {

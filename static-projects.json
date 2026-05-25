@@ -1,13 +1,13 @@
 [
   {
-    "autoId": "3",
-    "type": "macOS App",
+    "autoId": "4",
+    "type": "MacOS App",
     "updated": "Not Released",
     "stars": "None",
     "languages": "Swift",
-    "name": "Notepad",
-    "description": "Minimalist Notepad app for macOS.",
-    "tags": ["swift"],
+    "name": "System Monitor",
+    "description": "Watch your Mac breathe. System monitoring, reimagined.",
+    "tags": ["Swift"],
     "status": "-",
     "publishStatus": "Local / Unpublished",
     "repo": "",

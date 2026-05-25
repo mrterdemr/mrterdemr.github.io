@@ -609,6 +609,12 @@ h1 {
   font-weight: 700;
 }
 
+.chart-axis-labels text {
+  fill: #486984;
+  font-size: 12px;
+  font-weight: 800;
+}
+
 .data-table {
   width: 100%;
   overflow-x: auto;
