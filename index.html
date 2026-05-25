@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Murat Erdemir's software prototypes, tools, and experimental projects."
+    />
+    <title>Murat Erdemir | Project Orchestrator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=clean-language-bars" />
+  </head>
+  <body>
+    <header class="topbar">
+      <button
+        class="menu-button"
+        type="button"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="appMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="brand" href="#top" aria-label="Murat Erdemir project console">
+        <span class="brand-main">Murat Erdemir</span>
+      </a>
+      <nav class="module-nav" aria-label="Modules">
+        <a class="active" href="#analytics">Dashboards</a>
+        <a href="https://github.com/mrterdemr?tab=repositories" target="_blank" rel="noreferrer">Repository Tree</a>
+        <a href="#catalog">Project Catalog</a>
+        <a href="#commits">Commit Log</a>
+      </nav>
+      <div class="top-actions" aria-label="Account menu">
+        <button
+          class="account-toggle"
+          type="button"
+          aria-label="Account menu"
+          aria-expanded="false"
+          aria-controls="accountMenu"
+        >
+          <svg class="account-user-icon" viewBox="0 0 28 28" aria-hidden="true">
+            <circle cx="14" cy="7.5" r="5.1"></circle>
+            <path d="M5.6 25V20.4C5.6 15.8 9.1 13.4 14 13.4C18.9 13.4 22.4 15.8 22.4 20.4V25H5.6Z"></path>
+          </svg>
+          <svg class="account-chevron" viewBox="0 0 12 8" aria-hidden="true">
+            <path d="M1.4 1.2L6 5.8L10.6 1.2"></path>
+          </svg>
+        </button>
+        <div class="account-menu" id="accountMenu" hidden>
+          admin
+        </div>
+      </div>
+    </header>
+
+    <aside class="app-menu" id="appMenu" aria-label="Application menu" hidden>
+      <div class="recent-pages">
+        <h2>Recent Pages</h2>
+        <a href="#analytics">Dashboards</a>
+        <a href="https://github.com/mrterdemr?tab=repositories" target="_blank" rel="noreferrer">Repository Tree</a>
+        <a href="#catalog">Project Catalog</a>
+        <a href="#commits">Commit Log</a>
+      </div>
+      <div class="menu-directory">
+        <label class="menu-search">
+          <span class="visually-hidden">Search menu</span>
+          <input id="menuSearch" type="search" placeholder="Search" />
+        </label>
+        <div class="directory-grid" id="menuDirectory">
+          <section>
+            <h3>Reporting</h3>
+            <a href="#analytics">Dashboards</a>
+            <a href="#commits">Commit Log</a>
+          </section>
+          <section>
+            <h3>Repositories</h3>
+            <a href="https://github.com/mrterdemr?tab=repositories" target="_blank" rel="noreferrer">Repository Tree</a>
+          </section>
+          <section>
+            <h3>Project</h3>
+            <a href="#catalog">Project Catalog</a>
+          </section>
+        </div>
+      </div>
+      <div class="menu-build-info" aria-label="Server information">
+        <p>Server: mrterdemr.github.io</p>
+        <p>Time: <span id="menuUtcTime">--</span></p>
+        <p>User: admin</p>
+      </div>
+    </aside>
+
+    <main id="top" class="console">
+      <section class="page-title" id="workspace">
+        <h1>Dashboards</h1>
+      </section>
+
+      <nav class="tabs" aria-label="Project tabs">
+        <a class="active">Analytics</a>
+        <a>Project List</a>
+      </nav>
+
+      <section class="filter-ribbon" aria-label="Filters">
+        <label>
+          Present:
+          <select id="presentSelect">
+            <option value="all">All</option>
+          </select>
+        </label>
+        <span class="filter-label">Filters:</span>
+        <label>
+          Language
+          <select id="categorySelect"></select>
+        </label>
+        <label>
+          Status
+          <select id="statusSelect"></select>
+        </label>
+        <label class="search-label">
+          Project
+          <input id="searchInput" type="search" placeholder="No Filter" />
+        </label>
+        <button id="clearFilters" type="button">Clear Filters</button>
+      </section>
+
+      <section id="analytics" class="analytics-grid" aria-label="Analytics dashboard">
+        <article class="panel wide">
+          <h2>Projects by Language</h2>
+          <div class="bar-panel" id="categoryBars"></div>
+        </article>
+
+        <article class="panel">
+          <h2>Top Project Types</h2>
+          <div class="pie-panel">
+            <div class="pie" id="categoryPie" aria-hidden="true"></div>
+            <div class="legend-table" id="categoryLegend"></div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>Top Project Tags</h2>
+          <div class="legend-table" id="techLegend"></div>
+        </article>
+
+        <article class="panel wide">
+          <h2>Repository Update Timeline</h2>
+          <div class="line-panel" id="activityChart"></div>
+        </article>
+
+        <article class="panel">
+          <h2>Repository Endpoints</h2>
+          <div class="data-table compact" id="endpointTable"></div>
+        </article>
+
+        <article class="panel">
+          <h2>Publishing Status</h2>
+          <div class="pie-panel">
+            <div class="pie status-pie" id="statusPie" aria-hidden="true"></div>
+            <div class="legend-table" id="statusLegend"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="query-toolbar" id="catalog">
+        <div class="filter-buttons" id="filters" aria-label="Language filters"></div>
+        <p id="matchCount">Matching 0 out of 0 projects</p>
+      </section>
+
+      <section id="projects" class="project-list" aria-label="Project list">
+        <div class="data-table project-table" id="projectTable"></div>
+      </section>
+
+      <section id="commits" class="commit-log" aria-label="Commit list">
+        <div class="commit-toolbar">
+          <h2>Commit Log</h2>
+          <p id="commitCount">Matching 0 commits</p>
+        </div>
+        <div class="data-table commit-table" id="commitTable"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>GitHub Pages Console</p>
+      <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="script.js?v=clean-language-bars"></script>
+  </body>
+</html>
