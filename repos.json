@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-25T23:00:11Z",
+  "generatedAt": "2026-05-27T23:05:00Z",
   "repos": [
     {
       "id": 1249628378,
@@ -69,14 +69,14 @@
       "releases_url": "https://api.github.com/repos/mrterdemr/fastnote/releases{/id}",
       "deployments_url": "https://api.github.com/repos/mrterdemr/fastnote/deployments",
       "created_at": "2026-05-25T22:41:27Z",
-      "updated_at": "2026-05-25T22:53:49Z",
-      "pushed_at": "2026-05-25T22:53:45Z",
+      "updated_at": "2026-05-26T09:48:46Z",
+      "pushed_at": "2026-05-26T09:48:42Z",
       "git_url": "git://github.com/mrterdemr/fastnote.git",
       "ssh_url": "git@github.com:mrterdemr/fastnote.git",
       "clone_url": "https://github.com/mrterdemr/fastnote.git",
       "svn_url": "https://github.com/mrterdemr/fastnote",
-      "homepage": null,
-      "size": 0,
+      "homepage": "https://mrterdemr.github.io/fastnote/",
+      "size": 3388,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "Swift",
@@ -91,7 +91,13 @@
       "archived": false,
       "disabled": false,
       "open_issues_count": 0,
-      "license": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "spdx_id": "MIT",
+        "url": "https://api.github.com/licenses/mit",
+        "node_id": "MDc6TGljZW5zZTEz"
+      },
       "allow_forking": true,
       "is_template": false,
       "web_commit_signoff_required": false,
@@ -333,6 +339,27 @@
     {
       "repo": "fastnote",
       "repoUrl": "https://github.com/mrterdemr/fastnote",
+      "commitUrl": "https://github.com/mrterdemr/fastnote/commit/a7f8fe3f878c5a6ffd17a8ddf1d47f8d0b904f47",
+      "note": "MIT License",
+      "isoDate": "2026-05-26T09:48:42Z"
+    },
+    {
+      "repo": "fastnote",
+      "repoUrl": "https://github.com/mrterdemr/fastnote",
+      "commitUrl": "https://github.com/mrterdemr/fastnote/commit/f602f9640ea547dfab7bad5122b1f7d6150b171b",
+      "note": "v1.0.1 \u2014 Fix scrollbar square artifact",
+      "isoDate": "2026-05-26T09:37:36Z"
+    },
+    {
+      "repo": "fastnote",
+      "repoUrl": "https://github.com/mrterdemr/fastnote",
+      "commitUrl": "https://github.com/mrterdemr/fastnote/commit/c400ef954c77ce02f09714005b6f897446bdd051",
+      "note": "Replace Download button with GitHub link in navbar",
+      "isoDate": "2026-05-25T23:28:37Z"
+    },
+    {
+      "repo": "fastnote",
+      "repoUrl": "https://github.com/mrterdemr/fastnote",
       "commitUrl": "https://github.com/mrterdemr/fastnote/commit/9506a6f594688693116a2e8be68b673ac97f9e6c",
       "note": "Mobile responsive layout and fix navbar download link",
       "isoDate": "2026-05-25T22:53:44Z"
@@ -343,13 +370,6 @@
       "commitUrl": "https://github.com/mrterdemr/fastnote/commit/0a737a6054395fb4f6101c668227fa8b0aac14b6",
       "note": "Link download buttons to v1.0 release",
       "isoDate": "2026-05-25T22:48:51Z"
-    },
-    {
-      "repo": "fastnote",
-      "repoUrl": "https://github.com/mrterdemr/fastnote",
-      "commitUrl": "https://github.com/mrterdemr/fastnote/commit/4775d0fcba8fc44db1ca7cb99baedf3a880913a8",
-      "note": "Initial commit",
-      "isoDate": "2026-05-25T22:45:47Z"
     },
     {
       "repo": "hash2tie",
