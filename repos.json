@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T13:10:14Z",
+  "generatedAt": "2026-09-11T13:03:51Z",
   "repos": [
     {
       "id": 1249628378,
@@ -69,8 +69,8 @@
       "releases_url": "https://api.github.com/repos/mrterdemr/fastnote/releases{/id}",
       "deployments_url": "https://api.github.com/repos/mrterdemr/fastnote/deployments",
       "created_at": "2026-05-25T22:41:27Z",
-      "updated_at": "2026-06-01T19:12:33Z",
-      "pushed_at": "2026-06-01T19:11:26Z",
+      "updated_at": "2026-09-11T12:43:57Z",
+      "pushed_at": "2026-09-11T12:43:55Z",
       "git_url": "git://github.com/mrterdemr/fastnote.git",
       "ssh_url": "git@github.com:mrterdemr/fastnote.git",
       "clone_url": "https://github.com/mrterdemr/fastnote.git",
@@ -339,6 +339,20 @@
     {
       "repo": "fastnote",
       "repoUrl": "https://github.com/mrterdemr/fastnote",
+      "commitUrl": "https://github.com/mrterdemr/fastnote/commit/f95dca26e3efb423f74967659d346fc8442c0887",
+      "note": "docs: update website for FastNote 1.1.0",
+      "isoDate": "2026-09-11T12:43:24Z"
+    },
+    {
+      "repo": "fastnote",
+      "repoUrl": "https://github.com/mrterdemr/fastnote",
+      "commitUrl": "https://github.com/mrterdemr/fastnote/commit/4847d6da9bf0c2123510aab2a287253a4d7b3412",
+      "note": "feat: add CLI and multi-window support for 1.1.0",
+      "isoDate": "2026-09-11T12:43:24Z"
+    },
+    {
+      "repo": "fastnote",
+      "repoUrl": "https://github.com/mrterdemr/fastnote",
       "commitUrl": "https://github.com/mrterdemr/fastnote/commit/675b32d387a668bd93d74f21eeff3914db1a67c4",
       "note": "v1.0.4 \u2014 Fix unsaved content loss on language change restart",
       "isoDate": "2026-06-01T19:11:20Z"
@@ -356,20 +370,6 @@
       "commitUrl": "https://github.com/mrterdemr/fastnote/commit/fe3d0bcb621f6942eb285d8905823b7f03d134d6",
       "note": "v1.0.2 \u2014 Fix window not appearing on cold launch via file association",
       "isoDate": "2026-05-29T19:42:35Z"
-    },
-    {
-      "repo": "fastnote",
-      "repoUrl": "https://github.com/mrterdemr/fastnote",
-      "commitUrl": "https://github.com/mrterdemr/fastnote/commit/a7f8fe3f878c5a6ffd17a8ddf1d47f8d0b904f47",
-      "note": "MIT License",
-      "isoDate": "2026-05-26T09:48:42Z"
-    },
-    {
-      "repo": "fastnote",
-      "repoUrl": "https://github.com/mrterdemr/fastnote",
-      "commitUrl": "https://github.com/mrterdemr/fastnote/commit/f602f9640ea547dfab7bad5122b1f7d6150b171b",
-      "note": "v1.0.1 \u2014 Fix scrollbar square artifact",
-      "isoDate": "2026-05-26T09:37:36Z"
     },
     {
       "repo": "eXit-game",
